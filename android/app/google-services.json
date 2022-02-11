@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "203650809016",
+    "project_id": "sportsgear-10845",
+    "storage_bucket": "sportsgear-10845.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203650809016:android:50a0abdfc761dd87cb484d",
+        "android_client_info": {
+          "package_name": "com.example.sports_gear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203650809016-u8thcheuqbcfg5aigs7irisv74dhj7bt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sports_gear",
+            "certificate_hash": "6eb1192473617b783ea0ddc56c036f2c854f683c"
+          }
+        },
+        {
+          "client_id": "203650809016-2ehhouob5ujagnam9eq0vh12tmdl5013.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0JvWvk1qpT9xgT6gktt8-nb4m2kwP7Js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203650809016-2ehhouob5ujagnam9eq0vh12tmdl5013.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
