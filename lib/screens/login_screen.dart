@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter/material.dart';
@@ -29,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
 
     // email field
     final emailField = TextFormField(
@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if(value!.isEmpty){
           return "Password is requerd for Login";
         }
-        //  reg exprassion for email validation
+        //  reg exprassion
         if(!regExp.hasMatch(value)){
           return "Please Enter a Vaid Password(Min 6 Character)";
         }
@@ -145,7 +145,41 @@ class _LoginScreenState extends State<LoginScreen> {
                       emailField,
                       SizedBox(height: 25,),
                       passwordField,
-                      SizedBox(height: 35,),
+
+                      SizedBox(height: 15,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+
+                        children: [
+                          //  need a check box
+                          //  Checkbox(value: value, onChanged: onChanged),
+
+                          Text("Forget Password? "),
+                          GestureDetector(onTap: (){
+                            try{
+                              _auth.sendPasswordResetEmail(email: emailController.text);
+                              Fluttertoast.showToast(msg: "Email sent. Set a password min 6 character.");
+                            }catch(e){
+                              Fluttertoast.showToast(msg: e.toString());
+                            }
+
+                            // forget pass mail
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                          },
+                            child: Text(
+                              "ResetPass",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 15,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+
+                      //  Checkbox(value: true, onChanged: null),
+                      SizedBox(height: 25,),
                       loginButton,
                       SizedBox(height: 15,),
 
@@ -183,10 +217,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //  login function
   void signIn(String email, String password) async {
-    if(!_auth.currentUser!.emailVerified){
-      Fluttertoast.showToast(msg: "Email is not verified yet. Please Check your Mail");
-    }
-    if(_formKey.currentState!.validate() && _auth.currentUser!.emailVerified){
+
+    // if(!_auth.currentUser!.emailVerified){
+    //   Fluttertoast.showToast(msg: "Email is not verified yet. Please Check your Mail");
+    // }
+
+    if(_formKey.currentState!.validate()){
       await _auth.signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
             Fluttertoast.showToast(msg: "Login Successful"),
@@ -194,8 +230,17 @@ class _LoginScreenState extends State<LoginScreen> {
       }).catchError((e)
       {
         Fluttertoast.showToast(msg: e!.message);
+        //print(e);
       });
     }
   }
+
+  // pass reset
+  // void sendpasswordresetemail(String email) async{
+  //   await _auth.sendPasswordResetEmail(email: email).then((value) {
+  //     Get.offAll(LoginScreen());
+  //     Get.snackbar("Password Reset email link is been sent", "Success");
+  //   }).catchError((onError)=> Get.snackbar("Error In Email Reset", onError.message) );
+  // }
 
 }

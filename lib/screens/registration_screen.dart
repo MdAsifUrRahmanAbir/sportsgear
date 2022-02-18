@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sports_gear/model/user_model.dart';
 import 'package:sports_gear/screens/login_screen.dart';
-import 'package:sports_gear/screens/home_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -277,6 +276,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   void signup(String email, String password) async {
+    // if(_auth.currentUser!.isAnonymous){
+    //   Fluttertoast.showToast(msg: "Anonymus");
+    // }
+
     if(_formKey.currentState!.validate()) {
       await _auth.createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {
