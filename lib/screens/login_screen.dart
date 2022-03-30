@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter/material.dart';
@@ -130,7 +131,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      GestureDetector(
+                        child: Container(
+                          alignment: Alignment.topCenter,
+                          height: 50,
+                          width: 50,
+                          color: Colors.blue,
 
+                        ),
+                        onTap: (){
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+                        },
+                      ),
                       SizedBox(
                         height: 200,
 
