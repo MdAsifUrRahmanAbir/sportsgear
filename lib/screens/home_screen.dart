@@ -8,9 +8,12 @@ import 'package:sports_gear/drawer_screen/faq_screen.dart';
 import 'package:sports_gear/drawer_screen/objection_Screen.dart';
 import 'package:sports_gear/drawer_screen/terms_and_conditon_screen.dart';
 import 'package:sports_gear/model/user_model.dart';
+import 'package:sports_gear/drawer_screen/profile.dart';
+import 'package:sports_gear/screens/home_screens_widget_view/blog_screen.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/book_field_screen.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/buy_ticket_screen.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/hire_player_screen.dart';
+import 'package:sports_gear/screens/home_screens_widget_view/news_screen.dart';
 import 'package:sports_gear/screens/login_screen.dart';
 
 import 'bottom_nav_controller.dart';
@@ -73,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => BlogScreen()));
         },
         child: Text(
           "Blog",
@@ -91,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => NewsScreen()));
         },
         child: Text(
           "News",
@@ -278,7 +281,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             leading: Icon(Icons.person_rounded),
             title: Text("Profile"),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
+            },
           ),
           ListTile(
             leading: Icon(Icons.sticky_note_2_outlined),
@@ -327,6 +332,7 @@ class _HomeScreenState extends State<HomeScreen> {
               logout(context);
             },
           ),
+
         ],
       ),
     );

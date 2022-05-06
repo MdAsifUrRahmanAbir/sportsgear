@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetails extends StatefulWidget {
   var _product;
@@ -136,13 +135,13 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),
             Divider(),
             SizedBox(
-              width: 1.sw,
-              height: 56.h,
+              width: 200,
+              height: 60,
               child: ElevatedButton(
                 onPressed: () => addToCart(),
                 child: Text(
                   "Add to cart",
-                  style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,

@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sports_gear/drawer_screen/profile.dart';
 
 import 'bottom_nav_pages/cart.dart';
 import 'bottom_nav_pages/favourite.dart';
 import 'bottom_nav_pages/home.dart';
-import 'bottom_nav_pages/profile.dart';
 
 
 class BottomNavController extends StatefulWidget {
@@ -12,7 +13,7 @@ class BottomNavController extends StatefulWidget {
 }
 
 class _BottomNavControllerState extends State<BottomNavController> {
-  final _pages = [
+  late final _pages = [
     Home(),
     Favourite(),
     Cart(),
@@ -21,11 +22,17 @@ class _BottomNavControllerState extends State<BottomNavController> {
   var _currentIndex = 0;
 
   @override
+  void initState() {
+    //final _auth = FirebaseAuth.instance;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.blue,
+        elevation: 1,
         title: Text(
           "E-Commerce",
           style: TextStyle(color: Colors.black),
