@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sports_gear/drawer_screen/about_screen.dart';
 import 'package:sports_gear/drawer_screen/developers_screen.dart';
 import 'package:sports_gear/drawer_screen/faq_screen.dart';
-import 'package:sports_gear/drawer_screen/objection_Screen.dart';
 import 'package:sports_gear/drawer_screen/terms_and_conditon_screen.dart';
 import 'package:sports_gear/model/user_model.dart';
 import 'package:sports_gear/drawer_screen/profile.dart';
@@ -309,19 +309,27 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
 
-          ListTile(
-            leading: Icon(Icons.supervised_user_circle_sharp),
-            title: Text("Developer Team"),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => DeveloperScreen()));
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.supervised_user_circle_sharp),
+          //   title: Text("Developer Team"),
+          //   onTap: () {
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => DeveloperScreen()));
+          //   },
+          // ),
 
           ListTile(
             leading: Icon(Icons.record_voice_over_rounded),
             title: Text("Report"),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ObjectionScreen()));
+            onTap: () async{
+              final Email email = Email(
+                body: 'Hello Sports Gear Team,\n Write Text...',
+                subject: "I have a Report to your Team/ Club.",
+                recipients: ['sportsgear@gmail.com'],
+                isHTML: false,
+              );
+              await FlutterEmailSender.send(email);
+              //showSnackBar('Send Mail Success', context);
+
             },
           ),
 

@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sports_gear/drawer_screen/profile.dart';
-
+import 'bottom_nav_pages/order.dart';
 import 'bottom_nav_pages/cart.dart';
 import 'bottom_nav_pages/favourite.dart';
 import 'bottom_nav_pages/home.dart';
@@ -17,7 +16,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
     Home(),
     Favourite(),
     Cart(),
-    Profile(),
+    Order()
   ];
   var _currentIndex = 0;
 
@@ -34,7 +33,7 @@ class _BottomNavControllerState extends State<BottomNavController> {
         backgroundColor: Colors.blue,
         elevation: 1,
         title: Text(
-          "E-Commerce",
+          "SportsShop",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -50,8 +49,8 @@ class _BottomNavControllerState extends State<BottomNavController> {
             TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.shop),
+            label: 'Shop',
             //title: Text("Home"),
           ),
           BottomNavigationBarItem(
@@ -65,8 +64,8 @@ class _BottomNavControllerState extends State<BottomNavController> {
             //title: Text("Cart"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Person'
+            icon: Icon(Icons.shopping_bag_outlined),
+            label: 'My Order'
             //title: Text("Person"),
           ),
         ],

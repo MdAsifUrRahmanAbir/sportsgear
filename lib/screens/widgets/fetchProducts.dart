@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget fetchData (String collectionName){
+
+  double price = 0;
+  String? stPrice;
+
   return StreamBuilder(
     stream: FirebaseFirestore.instance
         .collection(collectionName)
@@ -25,12 +28,24 @@ Widget fetchData (String collectionName){
             DocumentSnapshot _documentSnapshot =
             snapshot.data!.docs[index];
 
+            if(snapshot.data == null){
+              price= 0;
+            }else{
+              stPrice = _documentSnapshot['price'].toString();
+              price = price + double.parse(stPrice!);
+            }
+
             return Card(
               elevation: 5,
               child: ListTile(
-                leading: Text(_documentSnapshot['name']),
+                leading: Image.network(_documentSnapshot['images'][0], width: 140,),
                 title: Text(
                   "\$ ${_documentSnapshot['price']}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.red),
+                ),
+                subtitle: Text(
+                  "\$ ${_documentSnapshot['name']}",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.red),
                 ),

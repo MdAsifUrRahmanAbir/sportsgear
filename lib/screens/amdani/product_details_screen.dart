@@ -32,7 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     final FirebaseAuth _auth = FirebaseAuth.instance;
     var currentUser = _auth.currentUser;
     CollectionReference _collectionRef =
-    FirebaseFirestore.instance.collection("users-favourite-items");
+        FirebaseFirestore.instance.collection("users-favourite-items");
     return _collectionRef
         .doc(currentUser!.email)
         .collection("items")
@@ -98,7 +98,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AspectRatio(
-              aspectRatio: 3.5,
+              aspectRatio: 1,
               child: CarouselSlider(
                   items: widget._product['product-img']
                       .map<Widget>((item) => Padding(
@@ -107,7 +107,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: NetworkImage(item),
-                                      fit: BoxFit.fitWidth)),
+                                      fit: BoxFit.fitHeight)),
                             ),
                           ))
                       .toList(),
@@ -129,7 +129,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               height: 10,
             ),
             Text(
-              "\$ ${widget._product['product-price'].toString()}",
+              "\TK ${widget._product['product-price'].toString()}",
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 30, color: Colors.red),
             ),

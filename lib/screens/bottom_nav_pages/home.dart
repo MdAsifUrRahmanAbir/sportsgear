@@ -141,16 +141,18 @@ class _HomeState extends State<Home> {
                             elevation: 3,
                             child: Column(
                               children: [
-                                AspectRatio(
-                                    aspectRatio: 2,
-                                    child: Container(
-                                        color: Colors.yellow,
-                                        child: Image.network(
-                                          _products[index]["product-img"][0],
-                                        ))),
+                                Container(
+                                  height: 150,
+                                    width: 150,
+                                    color: Colors.white,
+                                    child: Image.network(
+                                      _products[index]["product-img"][0],
+                                      fit: BoxFit.contain,
+                                      height: 150,
+                                      width: 100,
+                                    )),
                                 Text("${_products[index]["product-name"]}"),
-                                Text(
-                                    "${_products[index]["product-price"].toString()}"),
+                                Text("${_products[index]["product-price"].toString()}"),
                               ],
                             ),
                           ),

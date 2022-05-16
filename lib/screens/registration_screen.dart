@@ -25,6 +25,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
+  final addressEditingController = new TextEditingController();
+
 
 
 
@@ -59,6 +61,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         prefixIcon: Icon(Icons.person),
         contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "First Name",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+
+    // Adress
+    final addressField = TextFormField(
+      autofocus: false,
+      controller: addressEditingController,
+      keyboardType: TextInputType.name,
+      //validator:
+      validator: (value) {
+        if(value!.isEmpty){
+          return "Enter Your Address";
+        }
+        return null;
+      },
+      onSaved: (value)
+      {
+        addressEditingController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.person),
+        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Address",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -256,6 +286,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     SizedBox(height: 25,),
                     secondNameField,
                     SizedBox(height: 25,),
+                    addressField,
+                    SizedBox(height: 25,),
                     emailField,
                     SizedBox(height: 25,),
                     passwordField,
@@ -306,6 +338,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     userModel.uid = user.uid;
     userModel.firstName = firstNameEditingController.text;
     userModel.secondName = secondtNameEditingController.text;
+    userModel.address = addressEditingController.text;
 
     await firebaseFirestore
       .collection("users")

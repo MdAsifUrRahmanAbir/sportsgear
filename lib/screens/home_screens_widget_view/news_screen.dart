@@ -1,69 +1,86 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NewsScreen extends StatelessWidget {
-   NewsScreen({Key? key}) : super(key: key);
+class NewsScreen extends StatefulWidget {
+  NewsScreen({Key? key}) : super(key: key);
 
-  var text = '''
-Speaking at a pre-match press conference, Mominul said: "South Africa are playing at home and that is always an advantage. However, we have been here for nearly three weeks and the boys have adjusted to conditions."
+  @override
+  State<NewsScreen> createState() => _NewsScreenState();
+}
 
-Mominul and the other Test specialists had a training camp at former South African player and coach Gary Kirsten's academy in Cape Town, while the one-day side were pulling off an historic series win against South Africa.
+class _NewsScreenState extends State<NewsScreen> {
+  late var _firestoreInstance = FirebaseFirestore.instance;
+  late List _news = [];
 
-Bangladesh have lost all six Tests on three previous tours of South Africa and Kingsmead is an unknown factor for the current players, with Bangladesh having only once at the ground, when they lost to Canada in the 2003 Cricket World Cup.
+  fetchPlayers() async {
+    QuerySnapshot qn = await _firestoreInstance.collection("news").get();
+    setState(() {
+      for (int i = 0; i < qn.docs.length; i++) {
+        _news.add({
+          "news-name": qn.docs[i]["news-name"],
+          "news-post": qn.docs[i]["news-post"],
+          "news-image": qn.docs[i]["news-image"]
+        });
 
-Mominul said he was not sure how the pitch would play.
+        print(qn.docs[i]["news-name"]);
+      }
+    });
 
-"There's not too much point in thinking too much about the wicket. It could aid the pacers but still be good for batting. Spinners may come into play as the match progresses."
+    return qn.docs;
+  }
 
-Unlike on previous tours, Bangladesh will be looking to match South Africa with their fast bowlers.
-
-Ebadot Hossain was the man of the match when they won a Test in New Zealand in January, while Taskin Ahmed was the player of the ODI series against South Africa.
-
-"The pace bowlers have been doing very well in recent times," said Mominul. "They have a lot of confidence coming into this Test series and the whole team has confidence in them."
-
-South African left-arm spinner Keshav Maharaj, who plays his domestic cricket at Kingsmead, said earlier he was not sure how the pitch would play, with more grass on the surface than usual.
-
-"I haven't seen Kingsmead with the colour of the grass like this," he said. "It's a relaid surface." But he said he expected it to be a "traditional" first-class pitch.
-
-With South Africa's first-choice fast bowlers playing in the Indian Premier League, Maharaj is by a distance the most experienced Test bowler in the squad.
-
-But he said he was confident that the replacement pace bowlers would be able to challenge the Bangladesh batsmen.
-  ''';
-
-  var subTitle = '''
-  Bangladesh's captain Mominul Haque (right) fist bumps with teammate Liton Das during Day 3 of the second Test between New Zealand and Bangladesh in Christchurch on 11 January, 2022. AFP File
-  ''';
+  @override
+  void initState() {
+    fetchPlayers();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(title: Text('News'),),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Image.asset('assets/liton.jpg',fit: BoxFit.cover, width: double.infinity,),
-              Text(subTitle, maxLines: 10, style: TextStyle(fontSize: 14.0 ,color: Colors.black26)),
-              Text(
-                  'South Africa vs Bangladesh: Ready for the challenge, says Mominul Haque ahead of first Test',
-                style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5,),
-              Container(
-                height: .5,
-                width: double.infinity,
-                color: Colors.blue,
-              ),
-              SizedBox(height: 15,),
-              Container(
-                  child : Text(text, maxLines: 100, style: TextStyle(fontSize: 16.0 ,color: Colors.black54) ,
+        backgroundColor: Colors.white,
+        appBar: AppBar(title: Text('News'),
+          centerTitle: true,
+          actions: [
+            Icon(Icons.arrow_forward_ios),
+            SizedBox(width: 15,)
+          ],
+        ),
+        body: PageView.builder(
+            itemCount: _news.length,
+            itemBuilder: (context, index) {
+              return SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Container(
+                            height: MediaQuery.of(context).size.width+50,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.network(_news[index]["news-image"], fit: BoxFit.contain,)
+                        ),
+                        Text(
+                          _news[index]["news-name"],
+                          style: TextStyle(fontSize: 18.0 ,color: Colors.black87),
+                        ),
+                        SizedBox(height: 5,),
+                        Container(
+                          height: .5,
+                          width: double.infinity,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(height: 15,),
+                        Container(
+                            child : Text(_news[index]["news-post"], maxLines: 100, style: TextStyle(fontSize: 16.0 ,color: Colors.black54) ,
+                            )
+                        ),
+                      ],
+                    ),
                   )
-              ),
-            ],
-          ),
+              );
+            }
         )
-      ),
     );
   }
 }
