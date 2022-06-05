@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sports_gear/drawer_screen/about_screen.dart';
-import 'package:sports_gear/drawer_screen/developers_screen.dart';
 import 'package:sports_gear/drawer_screen/faq_screen.dart';
 import 'package:sports_gear/drawer_screen/terms_and_conditon_screen.dart';
 import 'package:sports_gear/model/user_model.dart';
@@ -12,6 +11,7 @@ import 'package:sports_gear/drawer_screen/profile.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/blog_screen.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/book_field_screen.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/buy_ticket_screen.dart';
+import 'package:sports_gear/screens/home_screens_widget_view/fitness_work.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/hire_player_screen.dart';
 import 'package:sports_gear/screens/home_screens_widget_view/news_screen.dart';
 import 'package:sports_gear/screens/login_screen.dart';
@@ -185,6 +185,27 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
 
+    final fitness = Material(
+      elevation: 6,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.blue,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        minWidth: MediaQuery.of(context).size.width,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FitnessWork()));
+        },
+        child: Text(
+          "Fitness Work",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Sports Gear"),
@@ -242,6 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 15,
               ),
+              fitness,
             ],
           ),
         ),

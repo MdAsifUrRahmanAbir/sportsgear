@@ -26,6 +26,13 @@ dependencies:
   firebase_core: ^1.12.0
   fluttertoast: ^8.0.8
   webview_flutter: ^3.0.2
+
+  flutter_spinkit:
+  cached_network_image:
+  http:
+  modal_progress_hud:
+  sleek_circular_slider:
+
 #  flutter_screenutil: ^5.0.0+2
   dots_indicator: ^2.0.0
   carousel_slider: ^4.0.0
